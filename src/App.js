@@ -3,6 +3,8 @@ import './App.css';
 import { Routes, Route, Link } from 'react-router-dom';
 import { Layout, Space, Typography } from 'antd';
 import Navbar from './components/Navbar';
+import { ErrorBoundary } from 'react-error-boundary';
+import ErrorFallback from './components/ErrorBoundary';
 
 const HomePage = lazy(() => import('./components/HomePage'));
 const Exchanges = lazy(() => import('./components/Exchanges'));
@@ -23,41 +25,66 @@ const App = () => {
               <Route
                 path="/"
                 element={
-                  <Suspense fallback={<div>Loading...</div>}>
-                    <HomePage />
-                  </Suspense>
+                  <ErrorBoundary
+                    FallbackComponent={ErrorFallback}
+                    onReset={() => { }}
+                  >
+                    <Suspense fallback={<div>Loading...</div>}>
+                      <HomePage />
+                    </Suspense>
+                  </ErrorBoundary>
                 }
               />
               <Route
                 path="/exchanges"
                 element={
-                  <Suspense fallback={<div>Loading...</div>}>
-                    <Exchanges />
-                  </Suspense>
+                  <ErrorBoundary
+                    FallbackComponent={ErrorFallback}
+                    onReset={() => { }}
+                  >
+                    <Suspense fallback={<div>Loading...</div>}>
+                      <Exchanges />
+                    </Suspense>
+                  </ErrorBoundary>
                 }
               />
               <Route
                 path="/cryptocurrencies"
                 element={
-                  <Suspense fallback={<div>Loading...</div>}>
-                    <Cryptocurrencies />
-                  </Suspense>
+                  <ErrorBoundary
+                    FallbackComponent={ErrorFallback}
+                    onReset={() => { }}
+                  >
+                    <Suspense fallback={<div>Loading...</div>}>
+                      <Cryptocurrencies />
+                    </Suspense>
+                  </ErrorBoundary>
                 }
               />
               <Route
                 path="/cryto/:coinId"
                 element={
-                  <Suspense fallback={<div>Loading...</div>}>
-                    <CrytoDetails />
-                  </Suspense>
+                  <ErrorBoundary
+                    FallbackComponent={ErrorFallback}
+                    onReset={() => { }}
+                  >
+                    <Suspense fallback={<div>Loading...</div>}>
+                      <CrytoDetails />
+                    </Suspense>
+                  </ErrorBoundary>
                 }
               />
               <Route
                 path="/news"
                 element={
-                  <Suspense fallback={<div>Loading...</div>}>
-                    <News />
-                  </Suspense>
+                  <ErrorBoundary
+                    FallbackComponent={ErrorFallback}
+                    onReset={() => { }}
+                  >
+                    <Suspense fallback={<div>Loading...</div>}>
+                      <News />
+                    </Suspense>
+                  </ErrorBoundary>
                 }
               />
             </Routes>
