@@ -382,3 +382,8 @@ a:hover {
 .ant-menu-item-selected {
   background-color: #169f9f !important;
 }
+
+.loading-spinner {
+  font-size: 50px !important;
+  color: #169f9f !important;
+}
