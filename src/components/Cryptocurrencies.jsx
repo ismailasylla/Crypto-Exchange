@@ -1,26 +1,14 @@
-import React, { useEffect, useState } from 'react';
-import millify from 'millify';
-import { Link } from 'react-router-dom';
+import React from 'react';
 import { Card, Row, Col, Input } from 'antd';
-
-import { useGetCryptosQuery } from '../services/cryptoApi';
+import { Link } from 'react-router-dom';
 import Loader from './Loader';
+import millify from 'millify';
+import useCryptos from './hooks/useCryptos';
 
 const Cryptocurrencies = ({ simplified }) => {
   const count = simplified ? 10 : 100;
-  const { data: cryptosList, isFetching } = useGetCryptosQuery(count);
-  const [cryptos, setCryptos] = useState();
-  const [searchTerm, setSearchTerm] = useState('');
-
-  useEffect(() => {
-    setCryptos(cryptosList?.data?.coins);
-
-    const filteredData = cryptosList?.data?.coins.filter((item) =>
-      item.name.toLowerCase().includes(searchTerm)
-    );
-
-    setCryptos(filteredData);
-  }, [cryptosList, searchTerm]);
+  const { cryptos, isFetching, searchTerm, handleSearchTermChange } =
+    useCryptos(simplified, count);
 
   if (isFetching) return <Loader />;
 
@@ -30,7 +18,7 @@ const Cryptocurrencies = ({ simplified }) => {
         <div className="search-crypto">
           <Input
             placeholder="Search Cryptocurrency"
-            onChange={(e) => setSearchTerm(e.target.value.toLowerCase())}
+            onChange={(e) => handleSearchTermChange(e.target.value)}
           />
         </div>
       )}
@@ -46,7 +34,13 @@ const Cryptocurrencies = ({ simplified }) => {
             <Link key={currency.uuid} to={`/crypto/${currency.uuid}`}>
               <Card
                 title={`${currency.rank}. ${currency.name}`}
-                extra={<img className="crypto-image" src={currency.iconUrl} />}
+                extra={
+                  <img
+                    className="crypto-image"
+                    alt="..."
+                    src={currency.iconUrl}
+                  />
+                }
                 hoverable
               >
                 <p>Price: {millify(currency.price)}</p>
