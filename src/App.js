@@ -5,6 +5,7 @@ import { Layout, Space, Typography } from 'antd';
 import Navbar from './components/Navbar';
 import { ErrorBoundary } from 'react-error-boundary';
 import ErrorFallback from './components/ErrorBoundary';
+import Loader from './components/Loader';
 
 const HomePage = lazy(() => import('./components/HomePage'));
 const Exchanges = lazy(() => import('./components/Exchanges'));
@@ -27,9 +28,9 @@ const App = () => {
                 element={
                   <ErrorBoundary
                     FallbackComponent={ErrorFallback}
-                    onReset={() => { }}
+                    onReset={() => {}}
                   >
-                    <Suspense fallback={<div>Loading...</div>}>
+                    <Suspense fallback={<Loader />}>
                       <HomePage />
                     </Suspense>
                   </ErrorBoundary>
@@ -40,9 +41,9 @@ const App = () => {
                 element={
                   <ErrorBoundary
                     FallbackComponent={ErrorFallback}
-                    onReset={() => { }}
+                    onReset={() => {}}
                   >
-                    <Suspense fallback={<div>Loading...</div>}>
+                    <Suspense fallback={<Loader />}>
                       <Exchanges />
                     </Suspense>
                   </ErrorBoundary>
@@ -53,9 +54,9 @@ const App = () => {
                 element={
                   <ErrorBoundary
                     FallbackComponent={ErrorFallback}
-                    onReset={() => { }}
+                    onReset={() => {}}
                   >
-                    <Suspense fallback={<div>Loading...</div>}>
+                    <Suspense fallback={<Loader />}>
                       <Cryptocurrencies />
                     </Suspense>
                   </ErrorBoundary>
@@ -66,9 +67,9 @@ const App = () => {
                 element={
                   <ErrorBoundary
                     FallbackComponent={ErrorFallback}
-                    onReset={() => { }}
+                    onReset={() => {}}
                   >
-                    <Suspense fallback={<div>Loading...</div>}>
+                    <Suspense fallback={<Loader />}>
                       <CrytoDetails />
                     </Suspense>
                   </ErrorBoundary>
@@ -79,9 +80,9 @@ const App = () => {
                 element={
                   <ErrorBoundary
                     FallbackComponent={ErrorFallback}
-                    onReset={() => { }}
+                    onReset={() => {}}
                   >
-                    <Suspense fallback={<div>Loading...</div>}>
+                    <Suspense fallback={<Loader />}>
                       <News />
                     </Suspense>
                   </ErrorBoundary>
