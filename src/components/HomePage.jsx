@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import millify from 'millify';
 import { Typography, Row, Col, Statistic } from 'antd';
 import { useGetCryptosQuery } from '../services/cryptoApi';
@@ -10,12 +10,15 @@ import News from './News';
 const { Title } = Typography;
 
 const Homepage = () => {
-  const { data, isFetching } = useGetCryptosQuery(10);
-  const globalStats = data?.data?.stats;
+  const { data, isFetching, refetch } = useGetCryptosQuery(10);
 
-  if (isFetching) return <Loader />;
+  useEffect(() => {
+    refetch();
+  }, [refetch]);
 
-  console.log(data);
+  if (isFetching || !data) return <Loader />;
+
+  const globalStats = data.data.stats;
 
   return (
     <>
