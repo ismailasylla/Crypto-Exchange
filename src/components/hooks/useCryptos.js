@@ -1,10 +1,14 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import { useGetCryptosQuery } from '../../services/cryptoApi';
 
 const useCryptos = (simplified, count) => {
   const { data: cryptosList, isFetching } = useGetCryptosQuery(count);
   const [cryptos, setCryptos] = useState();
   const [searchTerm, setSearchTerm] = useState('');
+
+  const handleSearchTermChange = useCallback((value) => {
+    setSearchTerm(value.toLowerCase());
+  }, []);
 
   useEffect(() => {
     setCryptos(cryptosList?.data?.coins);
@@ -20,7 +24,7 @@ const useCryptos = (simplified, count) => {
     cryptos,
     isFetching,
     searchTerm,
-    handleSearchTermChange: (value) => setSearchTerm(value.toLowerCase()),
+    handleSearchTermChange,
   };
 };
 
