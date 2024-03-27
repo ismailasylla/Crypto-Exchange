@@ -25,3 +25,5 @@ Start the application using npm:
 ```bash
 npm start
 ```
+
+You're all set ;-)
