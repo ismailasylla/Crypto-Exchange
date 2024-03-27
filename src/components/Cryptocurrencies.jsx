@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { Card, Row, Col, Input } from 'antd';
 import { Link } from 'react-router-dom';
 import Loader from './Loader';
@@ -10,6 +10,13 @@ const Cryptocurrencies = ({ simplified }) => {
   const { cryptos, isFetching, searchTerm, handleSearchTermChange } =
     useCryptos(simplified, count);
 
+  const memoizedHandleSearchTermChange = useCallback(
+    (value) => {
+      handleSearchTermChange(value);
+    },
+    [handleSearchTermChange]
+  );
+
   if (isFetching) return <Loader />;
 
   return (
@@ -18,7 +25,7 @@ const Cryptocurrencies = ({ simplified }) => {
         <div className="search-crypto">
           <Input
             placeholder="Search Cryptocurrency"
-            onChange={(e) => handleSearchTermChange(e.target.value)}
+            onChange={(e) => memoizedHandleSearchTermChange(e.target.value)}
           />
         </div>
       )}
